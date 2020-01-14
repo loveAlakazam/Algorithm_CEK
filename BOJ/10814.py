@@ -11,7 +11,6 @@ def solution():
     
     # 딕셔너리 value(나이)를 기준으로 정렬
     d.sort(key=lambda x:x[1])
-    print(d)
 
     # 딕셔너리 d의 key:이름, value:나이
     for name, age in d:
