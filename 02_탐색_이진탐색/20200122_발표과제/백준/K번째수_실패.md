@@ -2,7 +2,7 @@
 
 ## 실패코드 01
 
- ```(python)
+ ```python
  # -*- coding: utf-8 -*-
 import sys
 input= sys.stdin.readline
