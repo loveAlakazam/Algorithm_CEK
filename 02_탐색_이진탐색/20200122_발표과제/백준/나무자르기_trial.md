@@ -87,6 +87,7 @@ def solution():
 - 어떻게하면 여기서 걸리는 시간을 더 줄일 수 있을까?
 - sort() -> sorted()를 사용
 - sum([for문]) -> sum( for문)
+- 리스트 append 할 필요 없이 right값으로 리턴(h_left>h_right인 경우)
 ```python
 # -*- coding: utf-8 -*-
 # 이진탐색 : 백준 나무자르기 2805
@@ -99,26 +100,20 @@ def binary_search(N,M, trees):
     # H 값이 작을수록 상근이가 얻을 수 있는 나무길이값은 커진다.
     h_left=0
     h_right=trees[-1]
-    h_values=[]
     while h_left<=h_right:
         h_mid=(h_left+h_right)//2
         get_tree= sum( tree- h_mid for tree in trees if tree>h_mid)
-        #print('# h_left: {0}, h_mid:{1}, h_right:{2}\nget_tree:{3}'.format(h_left, h_mid,h_right, get_tree))
-        #print('#, h_mid: ',h_mid,'  get_tree: ',get_tree)
-
         # 상근이가 필요한 나무길이M보다 크게 나온경우는
         # H값을 큰쪽으로 늘리면 얻은 나무길이를 줄일 수 있다.
         if get_tree>=M:
             if get_tree==M:
                 return h_mid
             else:
-                #h_values.append(h_mid)
                 h_left= h_mid+1
         else:# get_tree<M
             #상근이가 필요한 나무길이보다 적게 나온경우는
             #H값을 작은쪽으로 줄여서 얻은나무길이를 늘린다.
-            h_right=h_mid-1
-    #print('# h_left: {0}, h_mid:{1}, h_right:{2}\nget_tree:{3}'.format(h_left, h_mid,h_right, get_tree))                   
+            h_right=h_mid-1                 
     return h_right
 
 def solution():
