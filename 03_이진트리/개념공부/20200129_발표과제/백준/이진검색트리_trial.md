@@ -86,7 +86,7 @@ def main():
         bst.insert_node(key=v)
 
     #전위순회로 먼저 확인
-    bst.pre_order(bst.root)
+    #bst.pre_order(bst.root)
 
     #후위순회
     bst.post_order(bst.root)
