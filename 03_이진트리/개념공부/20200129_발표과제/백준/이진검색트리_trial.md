@@ -95,3 +95,8 @@ if __name__=='__main__':
     main()
 
 ```
+- 틀린이유: 1,2,3,4,5,... 와 같이 연속된 수인 경우에는 일자선으로 불균형한 트리
+- 만일 1,2,3, ..., 9999 즉 1만개의 노드가 있다면 트리가 RecursionError maximum recursion depth exceeded라는 에러가 뜬다.
+- 이진탐색트리를 따로 만들지 않고 전위순회에서 후위순회로 한다... (참고: https://www.acmicpc.net/board/view/26171)
+
+# 시도2
