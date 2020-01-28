@@ -180,7 +180,8 @@ if __name__=='__main__':
   RecursionError maximum recursion depth exceeded라는 에러가 뜬다.
 - 참고: https://www.acmicpc.net/board/view/26171
 
-
+<br>
+<hr>
 
 # 시도2
 - 그런데도 런타임에러...하...
