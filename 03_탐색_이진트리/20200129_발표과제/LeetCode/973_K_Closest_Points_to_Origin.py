@@ -8,7 +8,7 @@ class TreeNode:
         self.d=sqrt(point[0]**2+point[1]**2) #원점과의 거리
         
 class BinarySearchTree:
-    def __init__(self,K):
+    def __init__(self):
         self.root=None #이진탐색트리의 루트노드 -> 처음에는 없다고 가정한다.
         self.ans=[] #초기화
         
@@ -36,8 +36,7 @@ class BinarySearchTree:
             if new_node.d>= prev.d:
                 prev.right=new_node
             else: #new_node.d<prev.d
-                prev.left=new_node
-    
+                prev.left=new_node  
     #전위순회
     def pre_order(self, node):
         if node: #노드가 존재한다면
@@ -49,12 +48,11 @@ class BinarySearchTree:
             
             #오른쪽서브트리 탐색
             self.pre_order(node.right)
-                
-        
+           
 class Solution:
     def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
         #이진탐색트리를 만든다.
-        bst=BinarySearchTree(K)
+        bst=BinarySearchTree()
         
         #points에 있는 원소들을가지고 노드를 삽입한다.
         for point in points:
@@ -63,3 +61,4 @@ class Solution:
         #전위순회
         bst.pre_order(bst.root)
         return bst.ans[:K]
+        
