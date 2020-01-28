@@ -180,4 +180,50 @@ if __name__=='__main__':
   RecursionError maximum recursion depth exceeded라는 에러가 뜬다.
 - 참고: https://www.acmicpc.net/board/view/26171
 
+
+
 # 시도2
+- 그런데도 런타임에러...하...
+
+```python
+# -*- coding: utf-8 -*-
+# 참고 소스코드: https://kyunstudio.tistory.com/172
+import sys
+input=sys.stdin.readline
+pre_order_nodes=[]
+
+# 후위순회
+def post_order(left, right):
+    if left<=right:
+        root=pre_order_nodes[left]
+        end=right
+        while pre_order_nodes[end]>root:
+            end-=1
+            
+        #왼쪽 서브트리
+        post_order(left+1, end)
+        #오른쪽서브트리
+        post_order(end+1,right)
+        #현재루트노드
+        print(root)
+        
+
+def main():
+    # 숫자 데이터(전위순회결과)를 입력받는다.
+    while True:
+        try:
+            v=int(input().strip())
+            pre_order_nodes.append(v)
+        except:
+            break
+
+    length=len(pre_order_nodes)
+    left=0
+    right=length-1
+    post_order(left=left, right=right)
+    
+
+if __name__=='__main__':
+    main()
+
+```
