@@ -86,6 +86,5 @@ if __name__=='__main__':
 <br>
 
 (2) 규칙
-
 ![ex_screenshot](./오르막수_풀이.png)
 
