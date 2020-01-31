@@ -14,7 +14,7 @@
 '9'
 ```
 
--코드
+- 코드
 ```python
 # -*- coding:utf-8 -*-
 import sys
