@@ -50,3 +50,42 @@ if __name__=='__main__':
 
 ```
 
+<hr>
+
+# 시도2 (성공! 88ms)
+- 규칙찾느라 머리 터지는줄 알았다..ㅎㅎㅎ
+
+```python
+# -*- coding:utf-8 -*-
+import sys
+from functools import reduce
+
+def main():
+    N=int(sys.stdin.readline())
+    dp=[0]*11
+
+    dp[10]=1
+    for _ in range(1,N+1):# 1부터 N까지 dp 리스트 갱신
+        for idx in range(1,11):
+            dp[idx] =reduce(lambda x,y: x+y, dp[idx:])
+    result=sum(dp)
+    print(result%10007)
+    
+if __name__=='__main__':
+    main()
+
+```
+
+## 풀이과정
+
+(1) python의 기본내장 라이브러리 functools의 reduce를 이용
+- reduce(lambda x,y : x+y , [1,2,3] ) =6
+- x:1, y:2 => x+y=1+2=3
+- x:3, y:3 => x+y=3+3=6
+
+<br>
+
+(2) 규칙
+
+![ex_screenshot](./오르막수_풀이.png)
+
