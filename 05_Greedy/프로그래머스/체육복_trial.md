@@ -34,6 +34,40 @@ def solution(n, lost, reserve):
 <hr>
 
 
-# 시도2
+# 시도2 (테스트 5, 7, 12에서 실패)
+- 코드
 ```python
+def solution(n, lost, reserve):
+    #lost와 reserve를 오름차순으로 정렬
+    lost=sorted(lost)
+    reserve=sorted(reserve)
+    
+    #빌려줄 수 있는 학생
+    is_reserve=[0]*(n+1)
+    for r in reserve:
+        is_reserve[r]=1
+        
+    # 전체학생수-도난당한 학생수
+    answer=n-len(lost)
+    
+    # 여벌을 가진 학생이 도난을 당했는지 확인
+    for l in lost:
+        if l in reserve:
+            # 이 학생은 도난당한 학생들에게 옷을 빌려줄수 없다.
+            is_reserve[l]=0
+            # 자기자신은 체육복이 있으므로
+            answer+=1
+
+    # 여벌을 갖지 않는 학생
+    for l in lost:
+        # l-1이 reserve에 있고 l-1가 빌려줄수 있다면
+        if (l-1 in reserve) and is_reserve[l-1]==1:
+            answer+=1
+            is_reserve[l-1]=0
+            
+        elif (l+1 in reserve) and is_reserve[l+1]==1:
+            answer+=1
+            is_reserve[l+1]=0
+
+    return answer
 ```
