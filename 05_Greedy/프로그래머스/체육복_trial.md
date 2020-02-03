@@ -1,5 +1,6 @@
 # 시도1 (테스트 1, 6, 7 에서 실패)
--코드
+- (반례) 질문 확인결과 n=3, lost=[1,2,3], reserve=[1,2,3]일때 최대 체육수업듣는 학생수: 3명
+- 코드
 ```python
 def solution(n, lost, reserve):
     #lost와 reserve를 오름차순으로 정렬
@@ -31,3 +32,8 @@ def solution(n, lost, reserve):
 ```
 
 <hr>
+
+
+# 시도2
+```python
+```
