@@ -136,3 +136,46 @@ if __name__=='__main__':
     main()
 
 ```
+
+<hr>
+
+# 시도3 (실패: 틀렸습니다 80%에서...ㅠㅠ)
+- 이유: 회의가 끝나는 시간이 서로 같을때 회의시간이 가장 작은값을 우선으로 한다.
+- 참고 블로그가 c++로 되어있어서.. 사용자가 만든 함수로 정렬시켰다.
+- 그런데 파이썬의 경우에는 사용자 정의함수로 sorted를 적용시킬 수가 없다. -> 왜냐면 에러가 뜬다..
+- 직접 정렬을 해야될거 같다는 생각이 들었다.
+- 코드
+```python
+# -*- coding: utf-8 -*-
+# 1931. 회의실 배정
+# 참고url: https://kim6394.tistory.com/67
+import sys
+   
+def main():
+    points=[]
+    N= int(sys.stdin.readline())
+    for n in range(N):
+        points.append(tuple(map(int,sys.stdin.readline().split())))
+
+    #회의끝나는 시간을 기준으로 오름차순 정렬    
+    print(points)
+    points=sorted(points, key=lambda x:x[1])
+    print(points)
+
+    result=0
+    last=0
+    for idx, p in enumerate(points):
+        s,e= map(int, p)
+        if idx==0:
+            last=e
+        else:
+            if last<=s:
+                last=e
+                result+=1
+                
+    print(result+1)#맨처음 회의시간 덧셈고려.         
+
+if __name__=='__main__':
+    main()
+
+```
