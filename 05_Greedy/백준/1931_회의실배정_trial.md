@@ -76,3 +76,63 @@ def main():
     print(result)
 
 ```
+
+<hr>
+
+# 시도2 (실패: 틀렸습니다 0%)
+- 반례: left_last<=i<=right_start일때 times[i]=0인 데이터가 존재한다면?
+- 코드
+```python
+# -*- coding: utf-8 -*-
+# 1931. 회의실 배정
+import sys
+
+def is_available(times, start, end):
+    for i in range(start, end):
+        if times[i]==1:
+            return False
+    return True
+
+def main():
+    N= int(sys.stdin.readline())
+    starts=[]
+    ends=[]
+    result=0
+    
+    for _ in range(N):
+        #시작시간: start
+        #끝나는 시간: end
+        start, end= map(int, sys.stdin.readline().split())
+        starts.append(start)
+        ends.append(end)
+
+    # ends에서 가장 큰값을 찾는다.
+    # times의 길이는 0부터 max(ends) 까지,  ends+1로 한다.
+    length= max(ends)+1
+    times=[0]*length
+
+    # 가능한 회의 시간 범위를 나타냄
+    # 0~left_last
+    # right_start~max(ends)
+    # left_last, right_start 초기화
+    left_last=length
+    right_start=-1
+    for start, end in zip(starts, ends):
+        # 현재하는 회의가 이전에 했던 회의와 겹치는지 확인
+        if (start<=left_last and end<=left_last) or (start>=right_start and end>=right_start):
+            ans=is_available(times, start, end)
+            if ans is True:
+                print(start,end)
+                
+                left_last=min(left_last, start)
+                right_start=max(right_start, end)
+                print('left_last: ',left_last, '  right_start: ',right_start)
+                result+=1
+                for i in range(start, end+1):
+                    times[i]=1
+    print(result)
+
+if __name__=='__main__':
+    main()
+
+```
