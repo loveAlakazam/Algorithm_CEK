@@ -57,5 +57,39 @@ if __name__=='__main__':
 
 <hr>
 
-#시도2
+# 시도2
+- 성공했는데 걸리는 런타임시간이... 2116ms...
+- 너무 오래걸렸음..
 - 코드
+```python
+# -*- coding: utf-8 -*-
+import sys
+def main():
+    N=int(sys.stdin.readline())
+    targets=[]
+    for _ in range(N):
+        targets.append(int(sys.stdin.readline()))
+    target_number= ''.join(map(str,targets))
+    arr=list(range(1,N+1))
+
+    result=''
+    process=[]
+    stack=[]
+    for t in targets:
+        while len(arr)>0 and arr[0]<=t:
+            stack.append(arr.pop(0))
+            process.append('+')
+            
+        if stack[-1]==t:
+            result=result+str(stack.pop())
+            process.append('-') 
+    
+    if target_number==result:
+        for p in process:
+            print(p)
+    else:
+        print('NO')
+if __name__=='__main__':
+    main()
+```
+
