@@ -1,12 +1,8 @@
 def solution(prices):
-    answer=[]
-    while len(prices)>1:
-        now=prices.pop(0)
-        cnt=0
-        for price in prices:
-            cnt+=1
-            if now>price:#가격이 떨어지는 순간
+    answer=len(prices)*[0]
+    for i in range(len(prices)-1):
+        for j in range(i+1, len(prices)):
+            answer[i]+=1
+            if prices[i]<=prices[j]:
                 break
-        answer.append(cnt)
-    answer.append(0)
     return answer
