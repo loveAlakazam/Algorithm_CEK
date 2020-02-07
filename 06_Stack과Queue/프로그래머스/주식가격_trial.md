@@ -22,8 +22,15 @@ def solution(prices):
 <hr>
 
 # 시도2
-- 결과
+- 결과: 성공
 - 코드
 ```python
-
+def solution(prices):
+    answer = [0]*len(prices)
+    for i in range(len(prices)-1):
+        for j in range(i+1, len(prices)):
+            answer[i]+=1
+            if prices[i]>prices[j]:
+                break
+    return answer
 ```
