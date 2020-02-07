@@ -23,6 +23,7 @@ def solution(prices):
 
 # 시도2
 - 결과: 성공
+- 2중 for문으로 풀었습니다.
 - 코드
 ```python
 def solution(prices):
