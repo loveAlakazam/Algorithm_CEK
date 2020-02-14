@@ -145,7 +145,7 @@ def main():
 
         for y in range(N):
             for x in range(M):
-                if ice[y][x]==0:
+                if (ice[y][x]==0) or(visited[y][x] is True):
                     continue
                 
                 #0이아닌 빙산이고
