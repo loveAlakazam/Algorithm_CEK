@@ -189,3 +189,91 @@ if __name__=='__main__':
     result=main()
     print(result)
 ```
+
+<hr>
+
+# 시도3 (실패)
+- BFS
+- 결과: 12%에서 실패
+- 코드
+```python
+import sys
+N,M= map(int, sys.stdin.readline().split())
+ice=[list(map(int, sys.stdin.readline().split())) for _ in range(N)] #ice: 초기 빙산 배열
+visited=[ [False]*M for _ in range(N)]#방문리스트
+
+#현재빙산의 상/하/좌/우 에 위치한 빙산
+d=[(-1,0), (1,0), (0,-1), (0,1)]
+
+def melt(y,x):
+    global ice
+    melt_cnt=0
+    for dy, dx in d:
+        nexty= y+dy
+        nextx= x+dx
+
+        if ice[nexty][nextx]==0:
+            melt_cnt+=1
+    return melt_cnt
+
+def BFS(y,x):
+    global ice
+    global visited
+    q=[]
+    
+    q.append((y,x)) #좌표를 큐에 넣는다
+    visited[y][x]=True
+    while q:
+        print(q,'\n')
+        cury, curx= q.pop(0)
+        for dy, dx in d: #현위치의 상하좌우
+            nexty= dy+cury
+            nextx= dx+curx
+
+            #방문을 안한 상태라면 큐에 넣는다.
+            #그리고 물이아닌 빙산인 경우만 해당한다.
+            if (ice[nexty][nextx]!=0) and(visited[nexty][nextx] is False):
+                #방문을 한다
+                visited[nexty][nextx]=True
+                q.append((nexty, nextx))
+        
+def solution():
+    global ice
+    global N,M
+    global visited
+
+    year=0
+    while True:
+        print('\n\nyear: ', year)
+        group_cnt=0 #빙산그룹 카운트
+        ice_copy=[[0]*M for _ in range(N)]
+        for y in range(1,N):
+            for x in range(1,M):
+                #방문하지 않았고, 0이 아니라면.
+                if (ice[y][x]!=0) and (visited[y][x] is False):
+                    group_cnt+=1
+                    BFS(y,x)#BFS를 실행한다.
+                    
+        if group_cnt>1:
+            return year
+        if group_cnt==0:
+            return 0
+
+        #ice_copy를 다음 ice로 갱신
+        for y in range(1,N-1):
+            for x in range(1,M-1):
+                if ice[y][x]!=0:
+                    ice_copy[y][x]= ice[y][x]-melt(y,x)
+                    if ice_copy[y][x]<0:
+                        ice_copy[y][x]=0              
+        ice=ice_copy
+        visited=[ [False]*M for _ in range(N)]#방문리스트 다시 초기화
+        year+=1
+    
+def main():
+    print(solution())
+
+if __name__=='__main__':
+    main()
+
+```
