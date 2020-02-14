@@ -277,3 +277,80 @@ if __name__=='__main__':
     main()
 
 ```
+
+
+<hr>
+
+# 시도4 (실패)
+- DFS를 이용
+- 코드
+```python
+import sys
+N,M= map(int, sys.stdin.readline().split())
+ice=[list(map(int, sys.stdin.readline().split())) for _ in range(N)] #ice: 초기 빙산 배열
+
+#현재빙산의 상/하/좌/우 에 위치한 빙산
+d=[(-1,0), (1,0), (0,-1), (0,1)]
+
+def melt(y,x):
+    global ice
+    melt_cnt=0
+    for dy, dx in d:
+        nexty= y+dy
+        nextx= x+dx
+
+        if ice[nexty][nextx]==0:
+            melt_cnt+=1
+    return melt_cnt
+
+# 빙산을 방문한다.
+def DFS(y,x, visited):
+    global ice
+    visited[y][x]=True #방문을한다
+
+    for dy, dx in d:
+        nexty= dy+y
+        nextx= dx+x
+        #물이 아니고, 방문을 안햇따면.
+        if (ice[nexty][nextx]>0) and (visited[nexty][nextx] is False):
+            DFS(nexty, nextx,visited)
+
+#dfs를 이용하여 연결된 빙산을 찾는다
+def isconnect():
+    global N,M
+    visited=[ [False]*M for _ in range(N)]
+    cnt=0
+    for y in range(N):
+        for x in range(M):
+            if (ice[y][x]>0) and (visited[y][x] is False):
+                DFS(y,x,visited)#깊이탐색하고
+                cnt+=1 #카운트
+    return cnt
+
+def solution():
+    global ice
+    global N,M
+    year=0
+    while True:
+        ice_copy=[[0]*M for _ in range(N)]
+        #빙산그룹 카운트
+        group_cnt=isconnect()
+        if group_cnt>1:
+            return year
+        if group_cnt==0:
+            return 0
+
+        #ice_copy를 다음 ice로 갱신
+        for y in range(0,N):
+            for x in range(0,M):
+                if ice[y][x]!=0:
+                    ice_copy[y][x]= max(0,ice[y][x]-melt(y,x))            
+        ice=ice_copy
+        year+=1
+    
+def main():
+    print(solution())
+
+if __name__=='__main__':
+    main()
+```
