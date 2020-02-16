@@ -57,5 +57,50 @@ if __name__=='__main__':
 
 <hr>
 
-## 시도2
+## 시도2 (성공)
+- 방법: 플로이드 와샬을 이용
+- pypy3(1092 ms)
+- memory: 123332KB
+- 그냥 순수 dfs로는 안됨.. ㅠ
 - 코드
+```python
+import sys
+class History:
+    def __init__(self, n):
+        self.n= n
+        self.connect=[ [0]*n for _ in range(n)] #인접리스트
+        self.visited=None #방문리스트
+
+    def floyd(self):
+        for x in range(self.n):
+            for y in range(self.n):
+                for z in range(self.n):
+                    if (x==y) or (y==z) or (x==z):
+                        continue
+                    else:
+                        if self.connect[y][z]==0:
+                            if (self.connect[y][x]==1) and (self.connect[x][z]==1):
+                                self.connect[y][z]=1
+                            elif (self.connect[y][x]==-1) and (self.connect[x][z]==-1):
+                                self.connect[y][z]=-1                          
+
+def main():
+    n, k= map(int, sys.stdin.readline().split())
+    h=History(n)
+    for _ in range(k):
+        front, rear= map(int, sys.stdin.readline().split())
+        h.connect[front-1][rear-1]=-1
+        h.connect[rear-1][front-1]=1
+
+    h.floyd()
+    s=int(sys.stdin.readline())
+    for _ in range(s):
+        start, target=map(int,sys.stdin.readline().split())
+        h.visited=[False]*n
+        print(h.connect[start-1][target-1])
+
+if __name__=='__main__':
+    main() 
+
+
+```
