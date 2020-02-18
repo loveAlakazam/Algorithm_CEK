@@ -69,7 +69,7 @@ public class Main
 	}
 
 	public static void main(String[] args)
-    {
+    	{
 		Scanner sc= new Scanner(System.in);
 		ROW=sc.nextInt();
 		COL=sc.nextInt();
@@ -87,10 +87,9 @@ public class Main
 		int year=0; //분리되는데 걸린시간
 		int linkedCnt=0; //연결된 빙하개수
 		while((linkedCnt=getLinkedCnt())<2)
-        {
+        	{
 			//연결된 빙하가 없다면, 빙하가 없다
-			if (linkedCnt==0)
-            {
+			if (linkedCnt==0){
 				year=0;
 				break;
 			}
