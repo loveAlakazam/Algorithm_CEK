@@ -26,7 +26,6 @@ def main():
             continue
         result[lopes[i]]=lopes[i]*(N-i)
 
-    print(result)
     #result를 value값을 기준으로 내림차순 정렬
     result=sorted(result.items(), key=lambda x: x[1], reverse=True)
     print(result[0][1])
