@@ -68,9 +68,6 @@ def solution():
                     if cnt>0:
                         bfs(y,x)
                         keep_loop=True
-        for m in A:
-            print(m)
-        print()
        
         if not keep_loop:
             break
